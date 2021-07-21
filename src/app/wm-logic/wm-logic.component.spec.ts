@@ -88,8 +88,15 @@ describe('WmLogicComponent', () => {
 
   it('should execute 23 DUP 4 POP 5 DUP + DUP + - and return 23, 3', ()=> {
     component.input([23, 'DUP', 4, 'POP', 5, 'DUP', '+', 'DUP', '+', '-']);
-    console.log(component.stack);
     expect(component.stack.length === 2).toBeTruthy();
     expect(JSON.stringify(component.stack) === JSON.stringify([23, 3])).toBeTruthy();
+  });
+  
+  it('should throw error for 5 6 + -', ()=> {
+    expect(
+      function() {
+        component.processCommand(component.input([5, 6, '+', '-']))
+      }
+      ).toThrow(new Error('Can not be parsed'));
   });
 });
