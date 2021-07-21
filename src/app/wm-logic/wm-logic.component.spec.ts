@@ -38,9 +38,27 @@ describe('WmLogicComponent', () => {
 
   it('should add 1 and duplicate it', ()=> {
     component.input([1, 'DUP']);
-    console.log(component.stack);
     expect(component.stack.length === 2).toBeTruthy();
     expect(component.stack[0] === 1).toBeTruthy();
     expect(component.stack[1] === 1).toBeTruthy();
+  });
+
+  it('should add 1, 2, and duplicate 2', ()=> {
+    component.input([1, 2, 'DUP']);
+    const arr = [1, 2, 2];
+    expect(component.stack.length === 3).toBeTruthy();
+    expect(JSON.stringify(component.stack) === JSON.stringify(arr)).toBeTruthy();
+  })
+
+  it('should add 1 and pop 1', ()=> {
+    component.input([1, 'POP']);
+    expect(component.stack.length === 0).toBeTruthy();
+    expect(JSON.stringify(component.stack) === JSON.stringify([])).toBeTruthy();
+  });
+
+  it('should add 1, 2 and pop 2', ()=> {
+    component.input([1, 2, 'POP']);
+    expect(component.stack.length === 1).toBeTruthy();
+    expect(JSON.stringify(component.stack) === JSON.stringify([1])).toBeTruthy();
   });
 });
