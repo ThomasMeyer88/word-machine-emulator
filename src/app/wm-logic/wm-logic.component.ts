@@ -11,15 +11,16 @@ export class WmLogicComponent {
 
   stack: Number[] = [];
 
-  input(arr: any[]) {
-    arr.forEach(i => {
+  input(arr: string) {
+    let splitArr = arr.split(' ');
+    splitArr.forEach(i => {
       this.processCommand(i);
     });
   }
 
   processCommand(i: any) {
-    if (typeof(i) === "number") {
-      this.stack.push(i);
+    if (parseInt(i)) {
+      this.stack.push(parseInt(i));
     } 
     else if ((i === "DUP" || i === "POP") && this.stack.length > 0) {
       if (i === "DUP") {
