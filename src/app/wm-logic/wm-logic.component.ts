@@ -37,7 +37,7 @@ export class WmLogicComponent {
       if (i === '-') {
         const v1 = this.stack.pop() as number;
         const v2 = this.stack.pop() as number;
-        this.stack.push(v1 - v2);     
+        this.stack.push(v2 - v1);     
       }
     }
   }

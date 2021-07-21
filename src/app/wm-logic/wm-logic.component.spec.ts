@@ -80,9 +80,16 @@ describe('WmLogicComponent', () => {
     expect(JSON.stringify(component.stack) === JSON.stringify([0])).toBeTruthy();
   });
 
-  it('should execute 1 1 2 - and return 1, 1', ()=> {
-    component.input([1, 1, 2, '-']);
+  it('should execute 1 2 1 - and return 1, 1', ()=> {
+    component.input([1, 2, 1, '-']);
     expect(component.stack.length === 2).toBeTruthy();
     expect(JSON.stringify(component.stack) === JSON.stringify([1, 1])).toBeTruthy();
+  });
+
+  it('should execute 23 DUP 4 POP 5 DUP + DUP + - and return 23, 3', ()=> {
+    component.input([23, 'DUP', 4, 'POP', 5, 'DUP', '+', 'DUP', '+', '-']);
+    console.log(component.stack);
+    expect(component.stack.length === 2).toBeTruthy();
+    expect(JSON.stringify(component.stack) === JSON.stringify([23, 3])).toBeTruthy();
   });
 });
