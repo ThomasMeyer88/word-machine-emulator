@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { WmLogicComponent } from './wm-logic/wm-logic.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    WmLogicComponent
   ],
   imports: [
     BrowserModule,
