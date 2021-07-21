@@ -28,6 +28,18 @@ export class WmLogicComponent {
         this.stack.pop();
       }
     }
+    if ((i === '+' || i === "-") && this.stack.length > 1) {
+      if (i === '+') {
+        const v1 = this.stack.pop() as number;
+        const v2 = this.stack.pop() as number;
+        this.stack.push(v1 + v2);
+      }
+      if (i === '-') {
+        const v1 = this.stack.pop() as number;
+        const v2 = this.stack.pop() as number;
+        this.stack.push(v1 - v2);     
+      }
+    }
   }
 
 }

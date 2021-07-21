@@ -61,4 +61,28 @@ describe('WmLogicComponent', () => {
     expect(component.stack.length === 1).toBeTruthy();
     expect(JSON.stringify(component.stack) === JSON.stringify([1])).toBeTruthy();
   });
+
+  it('should execute 1 1 + and return 2', ()=> {
+    component.input([1, 1, '+']);
+    expect(component.stack.length === 1).toBeTruthy();
+    expect(JSON.stringify(component.stack) === JSON.stringify([2])).toBeTruthy();
+  });
+
+  it('should execute 1 1 2 + and return 1, 3', ()=> {
+    component.input([1, 1, 2, '+']);
+    expect(component.stack.length === 2).toBeTruthy();
+    expect(JSON.stringify(component.stack) === JSON.stringify([1, 3])).toBeTruthy();
+  });
+
+  it('should execute 1 1 - and return 0', ()=> {
+    component.input([1, 1, '-']);
+    expect(component.stack.length === 1).toBeTruthy();
+    expect(JSON.stringify(component.stack) === JSON.stringify([0])).toBeTruthy();
+  });
+
+  it('should execute 1 1 2 - and return 1, 1', ()=> {
+    component.input([1, 1, 2, '-']);
+    expect(component.stack.length === 2).toBeTruthy();
+    expect(JSON.stringify(component.stack) === JSON.stringify([1, 1])).toBeTruthy();
+  });
 });
