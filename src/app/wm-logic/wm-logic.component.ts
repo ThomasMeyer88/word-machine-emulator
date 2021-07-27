@@ -9,6 +9,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class WmLogicComponent {
 
   error: Boolean = false;
+  errorMessage = 'Invalid Entry.  Valid entries are numeric, +, -, DUP, and SUP.  Addition and Subtraction requires multiple numbers present in stack. Duplication and Removal requires a number present in stack';
   stack: Number[] = [];
 
   inputForm = new FormGroup({
@@ -18,8 +19,12 @@ export class WmLogicComponent {
   constructor() { }
 
   
+  clearStack() {
+    this.stack = [];
+  }
 
   input(arr: string) {
+    this.error = false;
     let splitArr = arr.split(' ');
     splitArr.forEach(i => {
       this.processCommand(i);
@@ -32,9 +37,9 @@ export class WmLogicComponent {
       this.stack.push(parseInt(i));
     } 
     else if ((i.toUpperCase() === "DUP" || i.toUpperCase() === "POP") && this.stack.length > 0) {
-      if (i === "DUP") {
+      if (i.toUpperCase() === "DUP") {
         this.stack.push(this.stack[this.stack.length - 1]);
-      } else if (i === "POP") {
+      } else if (i.toUpperCase() === "POP") {
         this.stack.pop();
       }
     }
@@ -51,6 +56,7 @@ export class WmLogicComponent {
       }
     }
     else {
+      this.error = true;
       throw new Error('Can not be parsed');
     }
 

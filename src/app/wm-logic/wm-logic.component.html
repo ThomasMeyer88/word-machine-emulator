@@ -1,8 +1,19 @@
-<form [formGroup]="inputForm" (ngSubmit)="input(inputForm.controls.inputString.value)"> 
-    <mat-error *ngIf="error">
-        Invalid Entry.  Valid entries are numeric, +, -, DUP, and SUP.
-    </mat-error>
-    <input type="text" matInput formControlName="inputString" placeholder="">
-    <button mat-raised-button color="primary" type="submit">Enter</button>
-</form>
+<div class="row col-12">
+    <form [formGroup]="inputForm" (ngSubmit)="input(inputForm.controls.inputString.value)" class="col-9" style="display: inline"> 
+        <mat-error *ngIf="error" class="row col-12">
+            {{errorMessage}}
+        </mat-error>
+        <input type="text" matInput formControlName="inputString" placeholder="" class="col-6">
+        <button mat-raised-button color="primary" type="submit" class="col-2">Enter</button>
+    </form>
+    <button mat-raised-button color="warn" (click)="clearStack()" class="col-2">Clear</button>
+</div>
+
+
+<div class="row col-12 mt-3">
+    <div *ngFor="let x of stack; index as i">
+        Index {{i + 1}}: {{x}}
+    </div>
+</div>
+
 
