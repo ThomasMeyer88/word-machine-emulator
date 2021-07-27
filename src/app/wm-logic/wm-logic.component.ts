@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-wm-logic',
@@ -7,22 +8,30 @@ import { Component } from '@angular/core';
 })
 export class WmLogicComponent {
 
+  error: Boolean = false;
+  stack: Number[] = [];
+
+  inputForm = new FormGroup({
+    inputString: new FormControl('')
+  });
+
   constructor() { }
 
-  stack: Number[] = [];
+  
 
   input(arr: string) {
     let splitArr = arr.split(' ');
     splitArr.forEach(i => {
       this.processCommand(i);
     });
+    this.inputForm.controls['inputString'].setValue('');
   }
 
   processCommand(i: any) {
     if (parseInt(i)) {
       this.stack.push(parseInt(i));
     } 
-    else if ((i === "DUP" || i === "POP") && this.stack.length > 0) {
+    else if ((i.toUpperCase() === "DUP" || i.toUpperCase() === "POP") && this.stack.length > 0) {
       if (i === "DUP") {
         this.stack.push(this.stack[this.stack.length - 1]);
       } else if (i === "POP") {
@@ -44,5 +53,7 @@ export class WmLogicComponent {
     else {
       throw new Error('Can not be parsed');
     }
+
+    console.log(this.stack);
   }
 }

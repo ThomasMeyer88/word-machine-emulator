@@ -1,1 +1,8 @@
-<p>wm-logic works!</p>
+<form [formGroup]="inputForm" (ngSubmit)="input(inputForm.controls.inputString.value)"> 
+    <mat-error *ngIf="error">
+        Invalid Entry.  Valid entries are numeric, +, -, DUP, and SUP.
+    </mat-error>
+    <input type="text" matInput formControlName="inputString" placeholder="">
+    <button mat-raised-button color="primary" type="submit">Enter</button>
+</form>
+
